@@ -18,4 +18,4 @@ shiv \
     --compressed \
     -o 'firmware_release_server.pyz' \
     -e 'firmware_release_server.main' \
-    -p `which python`
+    -p '/usr/bin/env python3'
