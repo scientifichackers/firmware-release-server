@@ -21,7 +21,7 @@ if production:
     call_command("migrate")
     call_command("collectstatic", "--noinput")
 
-    subprocess.call(["nginx"])
+    subprocess.call(["nginx", "-g", "'daemon off;'"])
 
     # This is just a simple way to supply args to gunicorn
     sys.argv = [
