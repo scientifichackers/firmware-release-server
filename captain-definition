@@ -1,10 +1,13 @@
 {
-  "schemaVersion": 1,
-  "dockerfileLines": [
-    "FROM python:3.7.1",
-    "WORKDIR /home",
-    "COPY ./src .",
-    "EXPOSE 80",
-    "CMD ./firmware_release_server.pyz production"
-  ]
+    "schemaVersion": 1,
+    "dockerfileLines": [
+        "FROM python:3.7.1",
+        "WORKDIR /home",
+        "RUN apt-get update && apt-get install -y nginx",
+        "RUN echo "daemon off;" >> /etc/nginx/nginx.conf",
+        "COPY ./src .",
+        "COPY nginx-site.conf /etc/nginx/conf.d/default.conf",
+        "EXPOSE 80",
+        "CMD nohup ./firmware_release_server.pyz production &",
+    ],
 }

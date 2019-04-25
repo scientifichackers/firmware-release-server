@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 
 import django
@@ -20,9 +21,14 @@ if production:
     call_command("migrate")
     call_command("collectstatic", "--noinput")
 
-    # This is just a simple way to supply args to gunicorn
-    sys.argv = [".", "firmware_release_server.wsgi", "--bind=0.0.0.0:80"]
+    subprocess.call(["nginx"])
 
+    # This is just a simple way to supply args to gunicorn
+    sys.argv = [
+        ".",
+        f"--bind unix:/home/firmware_release_server.sock",
+        "firmware_release_server.wsgi",
+    ]
     wsgi.run()
 else:
     call_command("runserver")
