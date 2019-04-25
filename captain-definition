@@ -5,6 +5,6 @@
     "WORKDIR /home",
     "COPY ./src .",
     "EXPOSE 80",
-    "CMD python ./firmware_release_server.pyz production"
+    "CMD ./firmware_release_server.pyz production"
   ]
 }
