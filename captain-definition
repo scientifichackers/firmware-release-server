@@ -3,7 +3,7 @@
   "dockerfileLines": [
     "FROM python:3.7.1",
     "WORKDIR /home",
-    "COPY ./src/firmware_release_server.pyz ./firmware_release_server.pyz",
+    "COPY ./src .",
     "EXPOSE 80",
     "CMD python ./firmware_release_server.pyz production"
   ]
