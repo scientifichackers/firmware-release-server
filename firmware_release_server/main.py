@@ -26,7 +26,7 @@ if production:
     # This is just a simple way to supply args to gunicorn
     sys.argv = [
         ".",
-        f"--bind unix:/home/firmware_release_server.sock",
+        f"--bind=unix:/home/firmware_release_server.sock",
         "firmware_release_server.wsgi",
     ]
     wsgi.run()
