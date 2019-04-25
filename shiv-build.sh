@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#!/usr/bin/env bash
-
 # clean old build
 rm -r dist firmware_release_server.pyz
 
