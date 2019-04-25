@@ -1,0 +1,5 @@
+django
+semantic_version
+python-decouple
+djangorestframework
+gunicorn
