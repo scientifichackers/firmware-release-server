@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "dockerfileLines": [
-    "FROM python:3.6",
+    "FROM python:3.7.1",
     "COPY ./src/firmware_release_server.pyz ./firmware_release_server.pyz",
     "EXPOSE 80",
     "CMD ./firmware_release_server.pyz"
