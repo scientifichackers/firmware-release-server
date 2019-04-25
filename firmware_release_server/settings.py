@@ -31,6 +31,9 @@ DEBUG = config("DEBUG")
 ALLOWED_HOSTS = "*"
 
 
+DATA_DIR = Path(config("DATA_DIR")).expanduser().absolute()
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,9 +85,7 @@ WSGI_APPLICATION = "firmware_release_server.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(
-            BASE_DIR, str(Path(config("SQLITE_DB_PATH")).expanduser().absolute())
-        ),
+        "NAME": str(DATA_DIR / "db.sqlite3"),
     }
 }
 
@@ -122,9 +123,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
-_data_dir = Path(config("DATA_DIR")).expanduser().absolute()
-
-STATIC_ROOT = _data_dir / "staticfiles"
-MEDIA_ROOT = _data_dir / "mediafiles"
+STATIC_ROOT = str(DATA_DIR / "static")
+MEDIA_ROOT = str(DATA_DIR / "media")
 
 FIRMWARE_UPLOAD_DIR_NAME = "firmware_uploads"
