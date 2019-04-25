@@ -122,6 +122,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = str(Path(config("MEDIA_ROOT")).expanduser().absolute())
+_data_dir = Path(config("DATA_DIR")).expanduser().absolute()
+
+STATIC_ROOT = _data_dir / "staticfiles"
+MEDIA_ROOT = _data_dir / "mediafiles"
 
 FIRMWARE_UPLOAD_DIR_NAME = "firmware_uploads"
