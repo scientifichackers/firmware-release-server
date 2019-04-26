@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "firmware_uploads",
+    "firmware_uploads.apps.FirmwareUploadsConfig",
     "rest_api",
 ]
 

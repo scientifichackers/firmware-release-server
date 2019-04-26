@@ -1,7 +1,10 @@
 import semantic_version
 from django.contrib import admin
+from django.contrib.admin.models import LogEntry
 
 from firmware_uploads.models import FirmwareUpload, SEMVER_ORDER
+
+admin.site.register(LogEntry)
 
 
 def semver_sort_key(it: FirmwareUpload):
