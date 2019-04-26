@@ -1,6 +1,7 @@
-# Firmware Release Server
-
 [![Sponsor](https://img.shields.io/badge/Sponsor-jaaga_labs-red.svg?style=for-the-badge)](https://www.jaaga.in/labs)
+
+
+# Firmware Release Server
 
 A firmware release management service for IOT devices and friends.
 
