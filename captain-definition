@@ -3,10 +3,10 @@
     "dockerfileLines": [
         "FROM python:3.7.1",
         "WORKDIR /home",
-        "RUN apt-get update && apt-get install -y nginx",
-        "COPY ./src .",
+        "RUN apt-get update && apt-get install -y nginx wget",
+        "RUN wget -O app.pyz https://github.com/pycampers/firmware-release-server/releases/latest/download/firmware_release_server.pyz",
         "COPY ./src/nginx-site.conf /etc/nginx/sites-enabled/default",
         "EXPOSE 80",
-        "CMD nginx && ./firmware_release_server.pyz production"
+        "CMD nginx && python3 app.pyz production"
     ]
 }
