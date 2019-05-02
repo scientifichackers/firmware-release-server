@@ -16,9 +16,6 @@ def build_partitions_path(instance, _):
     return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.version}/partitions.bin"
 
 
-SEMVER_ORDER = ("-major_version", "-minor_version", "-patch_version")
-
-
 class FirmwareUploadQuerySet(models.QuerySet):
     def higher_version_than(self, semver: semantic_version.Version):
         # try getting objects with higher "major" version
@@ -41,23 +38,27 @@ class FirmwareUploadQuerySet(models.QuerySet):
         return filter_qs
 
 
+SEMVER_ORDER = ("major_version", "minor_version", "patch_version")
+
+
 class FirmwareUpload(models.Model):
     major_version = models.IntegerField()
     minor_version = models.IntegerField()
     patch_version = models.IntegerField()
-
+././
     firmware_bin = models.FileField(upload_to=build_firmware_path)
     bootloader_bin = models.FileField(upload_to=build_bootloader_path)
     partitions_bin = models.FileField(upload_to=build_partitions_path)
 
     comments = models.CharField(max_length=1000, default="")
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    deferred = models.BooleanField(default=False)
 
     objects = FirmwareUploadQuerySet.as_manager()
 
     class Meta:
         get_latest_by = SEMVER_ORDER
-        unique_together = tuple(i[1:] for i in SEMVER_ORDER)
+        unique_together = SEMVER_ORDER
 
     @property
     def version(self):

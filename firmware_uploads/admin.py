@@ -13,6 +13,6 @@ def semver_sort_key(it: FirmwareUpload):
 
 @admin.register(FirmwareUpload)
 class FirmwareUploadAdmin(admin.ModelAdmin):
-    list_display = ("__str__", "uploaded_at", "comments")
+    list_display = ("__str__", "uploaded_at", "comments", "deferred")
     readonly_fields = ("uploaded_at",)
     ordering = SEMVER_ORDER

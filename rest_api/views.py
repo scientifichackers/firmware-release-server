@@ -17,7 +17,7 @@ class LatestFirmwareView(RetrieveAPIView):
     lookup_field = "pk"
 
     def retrieve(self, request, *args, **kwargs):
-        qs = self.get_queryset()
+        qs = self.get_queryset().filter(deferred=False)
 
         try:
             version = kwargs["version"]
