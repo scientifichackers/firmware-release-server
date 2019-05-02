@@ -45,7 +45,7 @@ class FirmwareUpload(models.Model):
     major_version = models.IntegerField()
     minor_version = models.IntegerField()
     patch_version = models.IntegerField()
-././
+
     firmware_bin = models.FileField(upload_to=build_firmware_path)
     bootloader_bin = models.FileField(upload_to=build_bootloader_path)
     partitions_bin = models.FileField(upload_to=build_partitions_path)
