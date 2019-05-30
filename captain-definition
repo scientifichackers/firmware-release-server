@@ -8,6 +8,6 @@
         "RUN unzip -q app.zip",
         "COPY ./src/nginx-site.conf /etc/nginx/sites-enabled/default",
         "EXPOSE 80",
-        "CMD ./runserver.sh"
+        "CMD ./src/runserver.sh"
     ]
 }
