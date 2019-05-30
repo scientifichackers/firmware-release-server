@@ -47,7 +47,7 @@ SEMVER_ORDER = ("-major_version", "-minor_version", "-patch_version")
 
 
 class FirmwareUpload(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
 
     major_version = models.IntegerField()
     minor_version = models.IntegerField()

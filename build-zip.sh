@@ -12,3 +12,9 @@ cp -r firmware_release_server firmware_uploads products rest_api manage.py dist
 
 cd dist
 zip -qr ../app.zip *
+
+github-release upload \
+    --owner pycampers \
+    --repo firmware-release-server \
+    --tag $(cat __version__) \
+    app.zip
