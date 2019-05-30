@@ -14,7 +14,7 @@ python manage.py migrate
 echo "$ python manage.py collectstatic --noinput"
 python manage.py collectstatic --noinput
 
-ls -la
+ls -la bin
 
 echo "$ ./app/bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi"
 ./bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi
