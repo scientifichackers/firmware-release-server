@@ -6,6 +6,7 @@
         "RUN apt-get update && apt-get install -y nginx wget",
         "COPY ./src/nginx-site.conf /etc/nginx/sites-enabled/default",
         "COPY ./src/runserver.sh .",
+        "COPY ./src/__version__ .",
         "EXPOSE 80",
         "CMD ./runserver.sh"
     ]
