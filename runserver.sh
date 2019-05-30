@@ -1,5 +1,5 @@
 echo "downloading app.zip ..."
-wget -qO app.zip https://github.com/pycampers/firmware-release-server/releases/download/$(cat __version__ )/app.zip
+wget -qO app.zip "https://github.com/pycampers/firmware-release-server/releases/download/$(cat __version__ )/app.zip"
 echo "unzipping ..."
 unzip -q app.zip -d app
 
@@ -20,5 +20,5 @@ ls -la
 
 ls -la bin
 
-echo "$ ./app/bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi"
-./bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi
+echo "$ ./bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi"
+./gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi

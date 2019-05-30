@@ -11,5 +11,4 @@ pip install -r requirements/main.txt --target dist
 cp -r firmware_release_server firmware_uploads products rest_api manage.py dist
 
 cd dist
-
 zip -qr ../app.zip *
