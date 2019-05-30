@@ -3,7 +3,7 @@ wget -qO app.zip https://github.com/pycampers/firmware-release-server/releases/d
 echo "unzipping ..."
 unzip -q app.zip -d app
 
-la -la
+ls -la
 
 cd app
 
@@ -16,7 +16,7 @@ python manage.py migrate
 echo "$ python manage.py collectstatic --noinput"
 python manage.py collectstatic --noinput
 
-la -la
+ls -la
 
 ls -la bin
 
