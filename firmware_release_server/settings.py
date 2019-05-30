@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "firmware_uploads.apps.FirmwareUploadsConfig",
-    "products",
+    "products.apps.noinput",
     "rest_api",
 ]
 

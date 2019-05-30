@@ -4,9 +4,10 @@
         "FROM python:3.7.3",
         "WORKDIR /home",
         "RUN apt-get update && apt-get install -y nginx wget",
-        "RUN wget -O app.pyz https://github.com/pycampers/firmware-release-server/releases/latest/download/firmware_release_server.pyz",
+        "RUN wget -O app.zip https://github.com/pycampers/firmware-release-server/releases/latest/download/app.zip",
+        "RUN unzip -q app.zip",
         "COPY ./src/nginx-site.conf /etc/nginx/sites-enabled/default",
         "EXPOSE 80",
-        "CMD nginx && python3 app.pyz production"
+        "CMD ./runserver.sh"
     ]
 }
