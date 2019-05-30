@@ -14,5 +14,7 @@ python manage.py migrate
 echo "$ python manage.py collectstatic --noinput"
 python manage.py collectstatic --noinput
 
+export PYTHONPATH=$PYTHONPATH:$PWD
+
 echo "$ python bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi"
 python bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi
