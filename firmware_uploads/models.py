@@ -2,18 +2,23 @@ import semantic_version
 from django.db import models
 
 from firmware_release_server import settings
+from products.models import Product
+
+
+def build_base_path(instance, _):
+    return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.version}"
 
 
 def build_firmware_path(instance, _):
-    return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.version}/firmware.bin"
+    return build_base_path(instance, _) + "/firmware.bin"
 
 
 def build_bootloader_path(instance, _):
-    return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.version}/bootloader.bin"
+    return build_base_path(instance, _) + "/bootloader.bin"
 
 
 def build_partitions_path(instance, _):
-    return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.version}/partitions.bin"
+    return build_base_path(instance, _) + "/partitions.bin"
 
 
 class FirmwareUploadQuerySet(models.QuerySet):
@@ -38,10 +43,12 @@ class FirmwareUploadQuerySet(models.QuerySet):
         return filter_qs
 
 
-SEMVER_ORDER = ("major_version", "minor_version", "patch_version")
+SEMVER_ORDER = ("-major_version", "-minor_version", "-patch_version")
 
 
 class FirmwareUpload(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
+
     major_version = models.IntegerField()
     minor_version = models.IntegerField()
     patch_version = models.IntegerField()
@@ -52,13 +59,12 @@ class FirmwareUpload(models.Model):
 
     comments = models.CharField(max_length=1000, default="")
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    deferred = models.BooleanField(default=False)
 
     objects = FirmwareUploadQuerySet.as_manager()
 
     class Meta:
         get_latest_by = SEMVER_ORDER
-        unique_together = SEMVER_ORDER
+        unique_together = tuple(i[1:] for i in SEMVER_ORDER) + ("product",)
 
     @property
     def version(self):

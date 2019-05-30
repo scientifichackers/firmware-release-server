@@ -7,7 +7,8 @@ class FirmwareUploadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FirmwareUpload
         fields = (
-            "version",
+           "product",
+     "version",
             "firmware_bin",
             "bootloader_bin",
             "partitions_bin",
