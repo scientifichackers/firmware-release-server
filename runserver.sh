@@ -4,10 +4,11 @@ wget -qO app.zip "https://github.com/pycampers/firmware-release-server/releases/
 unzip -q app.zip -d app
 
 cd app
-export PYTHONPATH=$PYTHONPATH:$PWD
 
 python manage.py migrate
 python manage.py collectstatic --noinput
 
 nginx
+
+export PYTHONPATH=$PYTHONPATH:$PWD
 python bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi
