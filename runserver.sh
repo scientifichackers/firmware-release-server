@@ -1,6 +1,6 @@
-echo "downloading app zip"
+echo "downloading app.zip ..."
 wget -qO app.zip https://github.com/pycampers/firmware-release-server/releases/download/$(cat __version__ )/app.zip
-echo "unzipping..."
+echo "unzipping ..."
 unzip -q app.zip -d app
 
 cd app
@@ -17,4 +17,4 @@ python manage.py collectstatic --noinput
 ls -la
 
 echo "$ ./app/bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi"
-./app/bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi
+./bin/gunicorn --bind=unix:/home/firmware_release_server.sock firmware_release_server.wsgi
