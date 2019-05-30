@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include
 
+from dist.django.conf.urls import url
 from firmware_release_server import settings
 
 urlpatterns = [
     path("", lambda _: redirect("admin:index")),
+    url(r"^jet/", include("jet.urls", "jet")),  # Django JET URLS
     path("admin/", admin.site.urls),
-    path("api/", include('rest_api.urls')),
+    path("api/", include("rest_api.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

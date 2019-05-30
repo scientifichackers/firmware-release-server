@@ -37,6 +37,7 @@ DATA_DIR = Path(config("DATA_DIR")).expanduser().absolute()
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,8 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "firmware_uploads.apps.FirmwareUploadsConfig",
-    "products.apps.ProductsConfig",
+    "firmware_uploads",
+    "products",
     "rest_api",
 ]
 

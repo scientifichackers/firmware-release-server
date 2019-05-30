@@ -18,6 +18,6 @@ class FirmwareUploadModelForm(forms.ModelForm):
 @admin.register(FirmwareUpload)
 class FirmwareUploadAdmin(admin.ModelAdmin):
     form = FirmwareUploadModelForm
-    list_display = ("__str__", "uploaded_at", "comments")
+    list_display = ("__str__", "uploaded_at", "product")
     readonly_fields = ("uploaded_at",)
     ordering = SEMVER_ORDER
