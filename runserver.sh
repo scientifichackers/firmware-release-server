@@ -3,6 +3,8 @@ wget -qO app.zip https://github.com/pycampers/firmware-release-server/releases/d
 echo "unzipping ..."
 unzip -q app.zip -d app
 
+la -la
+
 cd app
 
 echo "nginx"
