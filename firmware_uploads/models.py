@@ -2,11 +2,12 @@ import semantic_version
 from django.db import models
 
 from firmware_release_server import settings
+from firmware_uploads.storage import OverwriteStorage
 from products.models import Product
 
 
 def build_base_path(instance, _):
-    return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.version}"
+    return f"{settings.FIRMWARE_UPLOAD_DIR_NAME}/{instance.product.name}/{instance.version}"
 
 
 def build_firmware_path(instance, _):
@@ -47,18 +48,26 @@ SEMVER_ORDER = ("-major_version", "-minor_version", "-patch_version")
 
 
 class FirmwareUpload(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=False)
 
     major_version = models.IntegerField()
     minor_version = models.IntegerField()
     patch_version = models.IntegerField()
 
-    firmware_bin = models.FileField(upload_to=build_firmware_path)
-    bootloader_bin = models.FileField(upload_to=build_bootloader_path)
-    partitions_bin = models.FileField(upload_to=build_partitions_path)
+    firmware_bin = models.FileField(
+        upload_to=build_firmware_path, storage=OverwriteStorage()
+    )
+    bootloader_bin = models.FileField(
+        upload_to=build_bootloader_path, storage=OverwriteStorage()
+    )
+    partitions_bin = models.FileField(
+        upload_to=build_partitions_path, storage=OverwriteStorage()
+    )
 
     comments = models.CharField(max_length=1000, default="")
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    deferred = models.BooleanField(default=False)
 
     objects = FirmwareUploadQuerySet.as_manager()
 
@@ -69,6 +78,10 @@ class FirmwareUpload(models.Model):
     @property
     def version(self):
         return f"{self.major_version}.{self.minor_version}.{self.patch_version}"
+
+    @property
+    def product_name(self):
+        return self.product.name
 
     def __str__(self):
         return self.version

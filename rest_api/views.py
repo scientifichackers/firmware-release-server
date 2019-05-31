@@ -14,7 +14,7 @@ class HttpResponseNoContent(HttpResponse):
 class LatestFirmwareView(RetrieveAPIView):
     queryset = FirmwareUpload.objects.all()
     serializer_class = FirmwareUploadSerializer
-    lookup_field = "pk"
+    lookup_field = "version"
 
     def retrieve(self, request, *args, **kwargs):
         qs = self.get_queryset().filter(deferred=False)
