@@ -5,7 +5,7 @@
 #    pip-compile ./main.in -v
 #
 django-jet==1.0.8
-django==2.2
+django==2.2.4
 djangorestframework==3.9.2
 gunicorn==19.9.0
 python-decouple==3.1
