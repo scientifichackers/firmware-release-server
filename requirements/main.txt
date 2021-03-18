@@ -5,10 +5,20 @@
 #    pip-compile ./main.in -v
 #
 django-jet==1.0.8
-django==2.2
+    # via -r main.in
+django==2.2.18
+    # via
+    #   -r main.in
+    #   django-jet
 djangorestframework==3.9.2
+    # via -r main.in
 gunicorn==19.9.0
+    # via -r main.in
 python-decouple==3.1
-pytz==2019.1              # via django
+    # via -r main.in
+pytz==2019.1
+    # via django
 semantic-version==2.6.0
-sqlparse==0.3.0           # via django
+    # via -r main.in
+sqlparse==0.3.0
+    # via django
